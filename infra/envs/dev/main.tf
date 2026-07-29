@@ -37,3 +37,27 @@ module "ecs" {
   alb_security_group_id = module.alb.alb_security_group_id
 
 }
+
+module "rds" {
+
+  source = "../../modules/rds"
+
+  vpc_id = module.network.vpc_id
+
+  private_subnet_ids = module.network.private_subnet_ids
+
+  ecs_security_group_id = module.ecs.ecs_security_group_id
+
+  db_name = var.db_name
+
+  db_username = var.db_username
+
+  db_password = var.db_password
+
+  instance_class = var.instance_class
+
+  backup_retention = var.backup_retention
+
+  deletion_protection = var.deletion_protection
+
+} 
